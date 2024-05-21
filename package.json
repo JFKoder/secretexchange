@@ -1,0 +1,24 @@
+{
+  "name": "secretexchange",
+  "version": "1.0.0",
+  "description": "Selfhosted exchangeservice for secret files",
+  "main": "index.js",
+  "scripts": {
+    "start": "node  -r dotenv/config main.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/JFKoder/secretexchange.git"
+  },
+  "author": "Janick Koder",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/JFKoder/secretexchange/issues"
+  },
+  "homepage": "https://github.com/JFKoder/secretexchange#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.2"
+  }
+}
