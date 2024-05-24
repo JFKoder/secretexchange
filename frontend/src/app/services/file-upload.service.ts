@@ -9,6 +9,8 @@ export class FileUploadService {
   private baseUrl = '/api';
 
   constructor(private http: HttpClient) { }
+
+  // Utility function to convert ArrayBuffer to base64
   private arrayBufferToBase64(buffer: ArrayBuffer): string {
     let binary = '';
     const bytes = new Uint8Array(buffer);
@@ -17,48 +19,6 @@ export class FileUploadService {
       binary += String.fromCharCode(bytes[i]);
     }
     return window.btoa(binary);
-  }
-
- // upload(file: File): Observable<HttpEvent<any>> {
-  upload(file: any): Observable<HttpEvent<any>> {
-    const formData: FormData = new FormData();
-    formData.append('file', file);
-    const req = new HttpRequest('POST', `${this.baseUrl}/upload`, formData, {
-      reportProgress: true,
-      responseType: 'json'
-    });
-    return this.http.request(req);
-  }
-
-  getFiles(): Observable<any> {
-    return this.http.get(`${this.baseUrl}/files`);
-  }
-  public kpv = {}
-
-  async encryptAndUploadFile(file: File): Promise<any> {
-    const arrayBuffer = await file.arrayBuffer();
-    const key = await this.generateKey();
-    const { iv, encryptedData } = await this.encryptData(key, arrayBuffer);
-    const keyExported = await crypto.subtle.exportKey('raw', key);
-
-    // Create FormData and append the encrypted data and IV
-    const formData = new FormData();
-    formData.append('file', new Blob([encryptedData]), file.name);
-
-    const strIV = this.arrayBufferToBase64(iv);(iv);
-    const strkeyExported = this.arrayBufferToBase64(keyExported);
-    this.kpv = {iv: strIV ,keyExported: strkeyExported }
-    console.log(this.kpv)
-    //formData.append('iv', new Blob([iv]));
-    //formData.append('key', new Blob([keyExported]));
-
-    // Upload the FormData
-    return this.http.post('/api/upload', formData).toPromise();
-  }
-
-  private strToArrayBuffer(str: string): ArrayBuffer {
-    const encoder = new TextEncoder();
-    return encoder.encode(str).buffer;
   }
 
   // Generate a random AES key
@@ -87,7 +47,29 @@ export class FileUploadService {
     return { iv, encryptedData };
   }
 
+  async encryptAndUploadFile(file: File): Promise<{ uploadResponse: any, ivKeyBase64: string, uuid: string }> {
+    const arrayBuffer = await file.arrayBuffer();
+    const key = await this.generateKey();
+    const { iv, encryptedData } = await this.encryptData(key, arrayBuffer);
+    const keyExported = await crypto.subtle.exportKey('raw', key);
 
+    // Convert IV and key to base64 and concatenate
+    const ivBase64 = this.arrayBufferToBase64(iv);
+    const keyBase64 = this.arrayBufferToBase64(keyExported);
+    const ivKeyBase64 = ivBase64 + keyBase64;
+
+    // Create FormData and append the encrypted data
+    const formData = new FormData();
+    const uuid = self.crypto.randomUUID();
+    
+    const nn = uuid+'++'+window.btoa(file.name)
+    formData.append('file', new Blob([encryptedData]), nn);
+    formData.append('ttl', '5 Min');
+
+    // Upload the FormData
+    const uploadResponse = await this.http.post('/api/upload', formData).toPromise();
+    return { uploadResponse, ivKeyBase64 ,uuid};
+  }
 
   
 }

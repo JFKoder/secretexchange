@@ -1,0 +1,78 @@
+<div class="px-4 pt-5 my-5  border-bottom">
+
+    <div class="col-lg-6 mx-auto">
+        <h1 class="display-4 fw-bold text-body-emphasis">
+            In-Browser File Encryption and Decryption
+        </h1>
+      <p class="lead mb-4">
+  
+            <p>TODO: <br>
+                ☐    max Filesize <br>
+                ☐    editable Lifetime of files<br>
+                ☐    InMemory storage<br>
+                ☐    Limit how can generate links (by Key, invitation Link, or so ...)<br>
+                ☐    Multi-File Upload<br>
+                ☐    Shred Files instead of Unlink/remove<br>
+                ☐    Run in Docker<br>
+                🗷    InBrowser Encryption and decryption</p>
+            <p>This program demonstrates a mechanism for securely encrypting and decrypting files entirely in the user&#39;s browser. It involves two main components:</p>
+            <ol>
+            <li><p><strong>File Upload with Encryption</strong>: The user selects a file to upload. Before uploading, the file is encrypted using AES-GCM encryption directly in the browser. The encryption key and initialization vector (IV) are generated and displayed to the user in Base64 format. The user can then copy this information to use for decryption.</p>
+            </li>
+            <li><p><strong>File Download with Decryption</strong>: The user enters the combined key and IV in Base64 format, along with the file name. The program fetches the encrypted file from the server, decrypts it in the browser using the provided key, and allows the user to download the decrypted file.</p>
+            </li>
+            </ol>
+            <h3 id="components">Components</h3>
+            <ol>
+            <li><p><strong>FileUploadService</strong>:</p>
+            <ul>
+            <li>Encrypts the selected file using AES-GCM.</li>
+            <li>Uploads the encrypted file to the server.</li>
+            <li>Returns the Base64-encoded key to the user.</li>
+            </ul>
+            </li>
+            <li><p><strong>EncryptionDownloadService</strong>:</p>
+            <ul>
+            <li>Fetches the encrypted file from the server.</li>
+            <li>Decrypts the file using the provided key.</li>
+            <li>Handles response headers from the server.</li>
+            </ul>
+            </li>
+            <li><p><strong>DecryptFileComponent</strong>:</p>
+            <ul>
+            <li>Takes user input for the key and file name.</li>
+            <li>Fetches and decrypts the encrypted file.</li>
+            <li>Handles and displays any errors.</li>
+            </ul>
+            </li>
+            </ol>
+            <h3 id="usage">Usage</h3>
+            <ol>
+            <li><p><strong>Encrypt and Upload</strong>:</p>
+            <ul>
+            <li>User selects a file to upload.</li>
+            <li>The file is encrypted in the browser and uploaded to the server.</li>
+            <li>The key is displayed to the user in Base64 format.</li>
+            </ul>
+            </li>
+            <li><p><strong>Decrypt and Download</strong>:</p>
+            <ul>
+            <li>User provides the key and file name.</li>
+            <li>The encrypted file is fetched from the server.</li>
+            <li>The file is decrypted in the browser.</li>
+            <li>The decrypted file is made available for download.</li>
+            </ul>
+            </li>
+            </ol>
+            <p>This program ensures that files are securely encrypted before upload and can only be decrypted by the user with the correct key, maintaining the confidentiality and integrity of the data. All encryption and decryption operations are performed in the browser, ensuring that sensitive data never leaves the user&#39;s device in an unencrypted form.</p>
+      </p>
+      <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+      </div>
+    </div>
+    <div class="overflow-hidden" style="max-height: 30vh;">
+      <div class="container px-5">
+        
+      </div>
+    </div>
+  </div>
+

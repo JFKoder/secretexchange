@@ -1,3 +1,21 @@
-<div>
-    <button (click)="onDecryptFile()">Decrypt File</button>
+<div class="px-4 pt-5 my-5 ">
+
+  <div class="col-lg-6 mx-auto  text-center">
+      <h1 class="display-4 fw-bold text-body-emphasis">
+          In-Browser File Encryption and Decryption
+      </h1>
+      <p class="lead mb-4">
+        <div *ngIf="customHeader" class="custom-header">Filename: {{ customHeader }}</div>
+        <textarea [(ngModel)]="ivKeyBase64" placeholder="Paste your Key here" matInput></textarea>
+    
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5">
+          <button mat-raised-button color="primary"  (click)="onDecryptFile()"><mat-icon aria-hidden="false" aria-label="download & unlock " fontIcon="lock_open"></mat-icon>Unlock File</button>
+          <div *ngIf="errorMessage" class="error">{{ errorMessage }}</div>
+        </div>
   </div>
+  <div class="overflow-hidden" style="max-height: 30vh;">
+    <div class="container px-5">
+      
+    </div>
+  </div>
+</div>

@@ -18,13 +18,17 @@ import {MatInputModule} from '@angular/material/input';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSelectModule} from '@angular/material/select';
+import {ClipboardModule} from '@angular/cdk/clipboard';
+import { AboutComponent } from './about/about.component';
+
 @NgModule({
   declarations: [
     AppComponent,
     MainComponent,
     NavigationComponent,
     EncComponent,
-    DecComponent
+    DecComponent,
+    AboutComponent
   ],
   imports: [
     BrowserModule,
@@ -40,7 +44,8 @@ import {MatSelectModule} from '@angular/material/select';
     HttpClientModule, 
     FormsModule, 
     ReactiveFormsModule,
-    MatSelectModule
+    MatSelectModule,
+    ClipboardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
