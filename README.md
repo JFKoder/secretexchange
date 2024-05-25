@@ -6,7 +6,10 @@ this service will take care about.
 
 No information will leave the browser unencrypted
 
+how to run it local on NodeJS:
+
     git clone https://github.com/JFKoder/secretexchange.git
+    npm install
     npm start
 
 TODO: 

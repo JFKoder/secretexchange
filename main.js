@@ -107,9 +107,7 @@ app.post('/api/upload', upload.fields([{ name: 'file' }]), (req, res, next) => {
       });
       }
     });
-     //a57c798d-c6b7-4060-b30f-180a0a9c59cb++1716396737133++MTIzLnR4dA==
-     // g/ZA2ixALsIYehSP0q6OY0bR40cqayAntYp2k7yWdM6Iilc32VN5i/N5Zuw=
-    // Download function provided by express
+
 })
 
   app.get('/api/fetch-encrypted-data', (req, res) => {

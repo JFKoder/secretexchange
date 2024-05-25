@@ -1,4 +1,11 @@
-<div [innerHTML]="htmlContent"></div> 
+<!--
+<mat-form-field floatLabel="always">
+    <mat-label>Amount</mat-label>
+    <input matInput type="number" class="example-right-align" placeholder="0">
+    <span matTextPrefix>$&nbsp;</span>
+    <span matTextSuffix>.00</span>
+  </mat-form-field>
+-->
 <div class="container d-flex align-items-center justify-content-center" >
   <div *ngIf="!ivKeyBase64" class="d-flex flex-column align-items-center justify-content-center" [formGroup]="uploadForm">
       <div class="dispElem">
@@ -14,19 +21,22 @@
     <div class="dispTitle">Copy this value to decrypt the file:</div>
     <div class=""> 
       
-      <div class="d-flex flex-column align-items-center justify-content-center"> 
+      <div class="dispInfo"> 
         <mat-form-field>
           <textarea readonly [(ngModel)]="ivKeyBase64" matInput></textarea>
         </mat-form-field>
         <button  *ngIf="ivKeyBase64" [cdkCopyToClipboard]="ivKeyBase64" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY KEY" fontIcon="content_copy"></mat-icon>COPY KEY</button>
       </div>
-      <div *ngIf="ivKeyBase64" class="d-flex flex-column align-items-center justify-content-center">
+      <div *ngIf="ivKeyBase64" class="dispElem">
        
-          <a class="dlLink" href="{{ link }}">{{ link }}</a>
-          <button  *ngIf="link" [cdkCopyToClipboard]="link" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY LINK" fontIcon="content_copy"></mat-icon>COPY LINK</button>
- 
+          <a href="{{ link }}">{{ link }}</a>
+        
+      </div>
+      <div  class="dispButton">
+        <button  *ngIf="link" [cdkCopyToClipboard]="link" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY LINK" fontIcon="content_copy"></mat-icon>COPY LINK</button>
       </div>
       
+
     </div>
   </div>
 </div>
