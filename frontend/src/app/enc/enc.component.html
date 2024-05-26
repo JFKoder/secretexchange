@@ -1,53 +1,35 @@
-<!--
-<mat-form-field floatLabel="always">
-    <mat-label>Amount</mat-label>
-    <input matInput type="number" class="example-right-align" placeholder="0">
-    <span matTextPrefix>$&nbsp;</span>
-    <span matTextSuffix>.00</span>
-  </mat-form-field>
--->
-<div class="container d-flex align-items-center justify-content-center" >
-  <div *ngIf="!ivKeyBase64" class="d-flex flex-column align-items-center justify-content-center" [formGroup]="uploadForm">
-      <div class="dispElem">
-        <input  type="file"  (change)="onFileSelected($event)">
-      </div>
-      <div class="dispElem">
-        <button (click)="onUpload()" mat-raised-button color="primary" ><mat-icon aria-hidden="false" aria-label="encrypt & upload" fontIcon="lock"></mat-icon>Upload</button>
-      </div>
+<div class="px-4  my-5 ">
+  <div class="col-lg-6 mx-auto  text-center">
+    <div [innerHTML]="htmlContent"></div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" *ngIf="!ivKeyBase64">
+            <input  type="file"  (change)="onFileSelected($event)">
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" *ngIf="!ivKeyBase64">
+            <button (click)="onUpload()" mat-raised-button color="primary" ><mat-icon aria-hidden="false" aria-label="encrypt & upload" fontIcon="lock"></mat-icon>Upload</button>       
+        </div>
+
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" *ngIf="ivKeyBase64">
+          <mat-form-field>
+            <textarea readonly [(ngModel)]="ivKeyBase64" matInput></textarea>
+          </mat-form-field>
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" *ngIf="ivKeyBase64">
+          <button   [cdkCopyToClipboard]="ivKeyBase64" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY KEY" fontIcon="content_copy"></mat-icon>COPY KEY</button>            
+             
+        </div>
+        <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" *ngIf="ivKeyBase64">
+          
+            <a class="dlLink" href="{{ link }}">{{ link }}</a>
+          </div>
+          <div class="d-grid gap-2 d-sm-flex justify-content-sm-center mb-5" *ngIf="link">
+            <button [cdkCopyToClipboard]="link" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY LINK" fontIcon="content_copy"></mat-icon>COPY LINK</button>
+             
+        </div>
+
   </div>
-
-  <div *ngIf="ivKeyBase64" class="d-flex flex-column align-items-center justify-content-center">
-    
-    <div class="dispTitle">Copy this value to decrypt the file:</div>
-    <div class=""> 
+  <div class="overflow-hidden" style="max-height: 30vh;">
+    <div class="container px-5">
       
-      <div class="dispInfo"> 
-        <mat-form-field>
-          <textarea readonly [(ngModel)]="ivKeyBase64" matInput></textarea>
-        </mat-form-field>
-        <button  *ngIf="ivKeyBase64" [cdkCopyToClipboard]="ivKeyBase64" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY KEY" fontIcon="content_copy"></mat-icon>COPY KEY</button>
-      </div>
-      <div *ngIf="ivKeyBase64" class="dispElem">
-       
-          <a href="{{ link }}">{{ link }}</a>
-        
-      </div>
-      <div  class="dispButton">
-        <button  *ngIf="link" [cdkCopyToClipboard]="link" mat-raised-button color="primary"><mat-icon aria-hidden="false" aria-label="COPY LINK" fontIcon="content_copy"></mat-icon>COPY LINK</button>
-      </div>
-      
-
     </div>
   </div>
 </div>
-
-<!--  
-  <div class="card mt-3">
-    <div class="card-header">List of Files</div>
-    <ul class="list-group list-group-flush">
-      <li *ngFor="let file of fileInfos | async" class="list-group-item">
-        <a href="{{ file.url }}">{{ file.name }}</a>
-      </li>
-    </ul>
-  </div>
--->
